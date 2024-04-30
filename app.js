@@ -1,17 +1,21 @@
 const express = require('express');
+const path = require('path');
+const bootstrap = require('./configs/bootstrap');
 const app = express();
 const port = 3000;
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(process.cwd(), 'views'));
+app.set('view engine', 'ejs');
+
 app.get('/*', (req, res) => {
-  const path = req.path.split('/');
-  const controlador = path[1];
-  const metodo = path[2];
-  const archivo = './controllers/' + controlador + '_controller.js';
-  require(archivo);
-  const instaciaControllador = controlador.charAt(0).toUpperCase() + controlador.slice(1) + 'Controller';
-  const instancia = eval(`new ${instaciaControllador}(${req}, ${res})`);
-  instancia[metodo]();
-  res.send('¡Hola mundo!');
+  try {
+    // Bloque de código donde puede ocurrir un error
+    bootstrap(req, res);
+  } catch (error) {
+    console.error(error);
+    res.send('error');
+  }
 });
 
 app.get('/hola', (req, res) => {
