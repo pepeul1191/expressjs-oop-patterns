@@ -4,12 +4,10 @@ class UserController
   {
     this.req = req;
     this.res = res;
-    console.log(':)')
   }
 
   index() {
-    console.log('index')
-    this.res.send('Home');
+    this.res.send('user/index');
   }
 }
 
