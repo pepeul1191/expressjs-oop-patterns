@@ -26,9 +26,9 @@ class UserController extends ApplicationController
       });
   }
 
-  list_dao()
+  async list_dao()
   {
-    this.userDao.fetchAll();
+    await this.userDao.fetchAll();
     this.res.send(this.userDao.toJSON());
   }
 }

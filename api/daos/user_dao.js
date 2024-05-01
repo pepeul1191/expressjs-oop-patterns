@@ -9,30 +9,23 @@ class UserDao extends Model
     this.list = [];
   }
 
-  fetchAll() // List<User>
-  {
-    this.db.query("SELECT * FROM users;", { })
-      .then(resultSet => {
-        resultSet.forEach(row => {
-          
-          const user = new User(row['id'], row['user']);
-          console.log(user);
-          this.list.push(user);
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+  async fetchAll() {
+    const data = await this.db.query('SELECT * FROM users;', {});
+    data[0].forEach(row => {
+      const user = new User(row['id'], row['user']);
+      this.list.push(user);
+    });
   }
 
   toJSON(){
     var listJSON = [];
     this.list.forEach(user => {
       listJSON.push({
+        id: user.id,
         user: user.user,
-        id: user.id
       });
     })
+    return listJSON;
   }
 }
 
