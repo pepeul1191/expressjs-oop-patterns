@@ -1,3 +1,5 @@
+const sequelize = require('./database');
+
 class ApplicationController 
 {
   constructor(req, res) 
@@ -7,6 +9,7 @@ class ApplicationController
     }else{
       this.req = req;
       this.res = res;
+      this.db = sequelize;
     }
   }
 

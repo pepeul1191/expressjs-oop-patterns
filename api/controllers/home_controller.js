@@ -7,7 +7,8 @@ class HomeController extends ApplicationController
     super(req, res);
   }
 
-  index() {
+  index() 
+  {
     console.log('index')
     this.res.render('home/index', { nombre: 'Mundo' });
   }

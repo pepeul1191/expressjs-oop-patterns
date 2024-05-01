@@ -7,7 +7,8 @@ class LoginController extends ApplicationController
     super(req, res);
   }
 
-  index() {
+  index() 
+  {
     this.res.send('login/index');
   }
 }
