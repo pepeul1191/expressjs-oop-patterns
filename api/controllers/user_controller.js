@@ -1,10 +1,12 @@
 const ApplicationController = require('../../configs/application_controller');
+const UserDao = require('../daos/user_dao');
 
 class UserController extends ApplicationController
 {
   constructor(req, res) 
   {
     super(req, res);
+    this.userDao = new UserDao();
   }
 
   index() 
@@ -22,6 +24,12 @@ class UserController extends ApplicationController
         console.error('Error:', error);
         this.res.status(500).send({message: error.message, stack: error.stack});
       });
+  }
+
+  list_dao()
+  {
+    this.userDao.fetchAll();
+    this.res.send(this.userDao.toJSON());
   }
 }
 
