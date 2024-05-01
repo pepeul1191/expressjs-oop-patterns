@@ -14,7 +14,6 @@ app.get('/*', (req, res) => {
     bootstrap(req, res);
   } catch (error) {
     console.error(error);
-    res.send('error');
   }
 });
 
