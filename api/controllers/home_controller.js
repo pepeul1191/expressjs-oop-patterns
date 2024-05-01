@@ -1,9 +1,10 @@
-class HomeController 
+const ApplicationController = require('../../configs/application_controller');
+
+class HomeController extends ApplicationController
 {
   constructor(req, res) 
   {
-    this.req = req;
-    this.res = res;
+    super(req, res);
   }
 
   index() {

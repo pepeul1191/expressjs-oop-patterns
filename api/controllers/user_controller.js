@@ -1,9 +1,10 @@
-class UserController 
+const ApplicationController = require('../../configs/application_controller');
+
+class UserController extends ApplicationController
 {
   constructor(req, res) 
   {
-    this.req = req;
-    this.res = res;
+    super(req, res);
   }
 
   index() {
