@@ -30,9 +30,14 @@ const bootstrap = (req, res) => {
       try {
         const modulePath = require.resolve(absolutePath); 
         const moduleExports = require(modulePath);
-        //const controllerClassName = controller.charAt(0).toUpperCase() + controller.slice(1) + 'Controller';
+        const controllerClassName = controller.charAt(0).toUpperCase() + controller.slice(1) + 'Controller';
         const instance = typeof moduleExports === 'function' ? new moduleExports(req, res) : moduleExports;
-        instance[method]();
+        if (typeof instance[method] === 'function') {
+          instance[method]()
+        }else{
+          console.error(`Controlador ${controllerClassName} no tiene el método ${method}`);
+          res.status(500).send({message: `Controlador ${controllerClassName} no tiene el método ${method}`, stack: ''});
+        }
       } catch (error) {
         console.error(error);
         res.status(500).send({message: error.message, stack: error.stack});
